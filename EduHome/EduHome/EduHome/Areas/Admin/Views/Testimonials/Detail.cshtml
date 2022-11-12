@@ -1,0 +1,21 @@
+﻿@model Testimonial
+
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-center">
+                    <img class="my-3" style="object-fit: contain; width: 200px; height: 140px !important" src="~/img/testimonial/@Model.Image" />
+                </div>
+                <h4>Name: @Model.Name</h4>
+                <div>Position: @Model.Position</div>
+                <div>Title: @Model.Title</div>
+                <a class="btn btn-behance my-3" asp-action="Index">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>

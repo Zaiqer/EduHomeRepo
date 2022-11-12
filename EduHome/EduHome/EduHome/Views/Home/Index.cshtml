@@ -1,0 +1,274 @@
+﻿@model HomeVM
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- Background Area Start -->
+<section id="slider-container" class="slider-area two">
+    <div class="slider-owl owl-theme owl-carousel">
+        @foreach (Slider slider in Model.Sliders)
+        {
+                <!-- Start Slingle Slide -->
+                <div class="single-slide item" style="background-image: url(../img/slider/@slider.Image)">
+                    <!-- Start Slider Content -->
+                    <div class="slider-content-area">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <div class="slide-content-wrapper">
+                                        <div class="slide-content text-center">
+                                            <h2>@slider.Title</h2>
+                                            <p>@slider.SubTitle</p>
+                                            <a class="default-btn" asp-controller="About" asp-action="Index">Learn more</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Start Slider Content -->
+                </div>
+                <!-- End Slingle Slide -->
+        }
+    </div>
+</section>
+<!-- Background Area End -->
+<!-- Service Start -->
+<div class="service-area two pt-150 pb-150 mx-3">
+    <div class="container">
+        <div class="row">
+            @foreach (Service service in Model.Services)
+            {
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="single-service">
+                        <h3><a asp-controller="Teachers" asp-action="Index">@service.Name</a></h3>
+                        <p>@service.Description</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- Service End -->
+<!-- About Start -->
+<div class="about-area pb-155">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="about-content">
+                    <h2>@Html.Raw(Model.About.Title)</h2>
+                    @Html.Raw(Model.About.Description)
+                    <a class="default-btn" asp-controller="About" asp-action="Index">view courses</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="about-img">
+                    <img src="~/img/about/@Model.About.Image" alt="about">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+<!-- Courses Area Start -->
+<div class="courses-area two pt-150 pb-150 text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="section-title">
+                    <img src="~/img/icon/section1.png" alt="section-title">
+                    <h2>COURSES WE OFFER</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (Course course in Model.Courses)
+            {
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="single-course">
+                        <div class="course-img">
+                            <a asp-controller="Courses" asp-action="Detail">
+                                <img src="~/img/course/@course.Image" alt="course">
+                                <div class="course-hover">
+                                    <i class="fa fa-link"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="course-content">
+                            <h3><a asp-controller="Courses" asp-action="Detail">@course.Title</a></h3>
+                            <p>@course.Subtitle</p>
+                            <a class="default-btn" asp-controller="Courses" asp-action="Detail">read more</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- Courses Area End -->
+<!-- Notice Start -->
+<section class="notice-area two pt-140">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="notice-right-wrapper mb-25 pb-25">
+                    <h3>@Model.Notice.Title</h3>
+                    <div class="notice-video">
+                        <div class="video-icon video-hover">
+                            @Html.Raw(Model.Notice.Video)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="notice-left-wrapper">
+                    <h3>notice board</h3>
+                    <div class="notice-left">
+                        @foreach (NoticeBoard noticeBoard in Model.NoticeBoards)
+                        {
+
+                            <div class="single-notice-left mb-23 pb-20">
+                                <h4>@noticeBoard.Date</h4>
+                                <p>@noticeBoard.SubTitle</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Notice End -->
+<!-- Event Area Start -->
+<div class="event-area two text-center pt-100 pb-145">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="section-title">
+                    <img src="~/img/icon/section.png" alt="section-title">
+                    <h2>UPCOMMING EVENTS</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            @foreach (Event @event in Model.Events)
+            {<div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="single-event mb-35">
+                        <div class="event-img">
+                            <a href="event-details.html"><img src="img/event/@(@event.Image)" alt="event"></a>
+                        </div>
+                        <div class="event-content text-left">
+                            <h3>@(@event.Date)</h3>
+                            <h4>@Html.Raw(@event.Name)</h4>
+                            <ul>
+                                <li><i class="fa fa-clock-o"></i>@(@event.Clock)</li>
+                                <li><i class="fa fa-map-marker"></i>@(@event.City)</li>
+                            </ul>
+                            <div class="event-content-right">
+                                <a class="default-btn" asp-controller="Events" asp-action="Detail">join now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- Event Area End -->
+<!-- Testimonial Area Start -->
+<div class="testimonial-area pt-110 pb-105 text-center">
+    <div class="container">
+        <div class="row">
+            <div class="testimonial-owl owl-theme owl-carousel">
+                @foreach (Testimonial testimonial in Model.Testimonials)
+                {
+                    <div class="col-md-8 col-md-offset-2 col-sm-12">
+                        <div class="single-testimonial">
+                            <div class="testimonial-info">
+                                <div class="testimonial-img">
+                                    <img src="~/img/testimonial/@testimonial.Image" alt="testimonial">
+                                </div>
+                                <div class="testimonial-content">
+                                    <p>@testimonial.Title</p>
+                                    <h4>@testimonial.Name</h4>
+                                    <h5>@testimonial.Position</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Testimonial Area End -->
+<!-- Blog Area Start -->
+<div class="blog-area pt-150 pb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="section-title text-center">
+                    <img src="~/img/icon/section.png" alt="section-title">
+                    <h2>LATEST FROM BLOG</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (Blog blog in Model.Blogs)
+            {
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="single-blog">
+                        <div class="blog-img">
+                            <a asp-controller="Blogs" asp-action="Detail"><img src="~/img/blog/@blog.Image" alt="blog"></a>
+                            <div class="blog-hover">
+                                <a href="blog-details.html"><i class="fa fa-link"></i></a>
+                            </div>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-top">
+                                <p>@blog.By  /  @blog.CreateTime.ToString("dd MMMM yyyy HH:mm")  /  <i class="fa fa-comments-o"></i> 4</p>
+                            </div>
+                            <div class="blog-bottom">
+                                <h2>@Html.Raw(blog.Title)</h2>
+                                <a asp-controller="Blogs" asp-action="Detail">read more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- Blog Area End -->
+<!-- Subscribe Start -->
+<div class="subscribe-area pt-60 pb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="subscribe-content section-title text-center">
+                    <h2>subscribe our newsletter</h2>
+                    <p>I must explain to you how all this mistaken idea </p>
+                </div>
+                <div class="newsletter-form mc_embed_signup">
+                    <form action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                        <div id="mc_embed_signup_scroll" class="mc-form">
+                            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your e-mail address" required>
+                            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                            <div class="mc-news" aria-hidden="true"><input type="text" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef" tabindex="-1" value=""></div>
+                            <button id="mc-embedded-subscribe" class="default-btn" type="submit" name="subscribe"><span>subscribe</span></button>
+                        </div>
+                    </form>
+                    <!-- mailchimp-alerts Start -->
+                    <div class="mailchimp-alerts">
+                        <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
+                        <div class="mailchimp-success"></div><!-- mailchimp-success end -->
+                        <div class="mailchimp-error"></div><!-- mailchimp-error end -->
+                    </div>
+                    <!-- mailchimp-alerts end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Subscribe End -->

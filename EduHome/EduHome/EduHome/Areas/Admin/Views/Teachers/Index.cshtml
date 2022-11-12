@@ -1,0 +1,94 @@
+﻿@model List<Teacher>
+
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-content-center">
+                    <h4 class="card-title">Teachers</h4>
+                    <a asp-action="Create" class="btn btn-primary btn-rounded">Create</a>
+                </div>
+                <div class="table-responsive pt-3">
+                    <table id="myTable" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Images
+                                </th>
+                                <th>
+                                    FullName
+                                </th>
+                                <th>
+                                    Position
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Actions
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Teacher item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <img style="object-fit: cover; width: 100px; height: 100px" src="~/img/teacher/@item.Image" />
+                                    </td>
+                                    <td>
+                                        @item.FullName
+                                    </td>
+                                    <td>
+                                        @item.Position.Name
+                                    </td>
+                                    <th>
+                                        @if (item.IsDeactive)
+                                        {
+                                            <div class="text-danger">
+                                                Deactive
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="text-success">
+                                                Active
+                                            </div>
+                                        }
+                                    </th>
+                                    <td>
+                                        <a class="btn btn-info btn-sm btn-rounded mx-1" asp-action="Detail" asp-route-id="@item.Id">Detail</a>
+                                        <a class="btn btn-warning btn-sm btn-rounded mx-1" asp-action="Update" asp-route-id="@item.Id">Update</a>
+                                        @if (item.IsDeactive)
+                                        {
+                                            <div class="text-danger d-inline mx-1">
+                                                <a class="btn btn-success btn-sm btn-rounded" asp-action="Activation" asp-route-id="@item.Id">Activate</a>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="text-success d-inline mx-1">
+                                                <a class="btn btn-danger btn-sm btn-rounded" asp-action="Activation" asp-route-id="@item.Id">Deactivate</a>
+                                            </div>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Css{
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+}
+@section Scripts{
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}

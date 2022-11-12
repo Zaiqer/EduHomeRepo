@@ -1,0 +1,23 @@
+﻿@model Teacher
+
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-center">
+                    <img style="width:300px; height:180px; object-fit:contain" src="~/img/teacher/@Model.Image" />
+                </div>
+                <h4>Fullname: @Model.FullName</h4>
+                <div>Position: @Model.Position.Name</div>
+                <a class="btn btn-behance my-3" asp-action="Index">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
